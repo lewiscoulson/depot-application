@@ -1,29 +1,25 @@
 <h1>Listing products</h1>
 
 <table>
-<% cache ['store', Product.latest] do %>
   <% @products.each do |product| %>
-    <% cache ['entry', product] do %>
-      <tr class="<%= cycle('list_line_odd', 'list_line_even') %>">
-        <td>
-          <%= image_tag(product.image_url, class: 'list_image') %>
-        </td>
-        <td class="list_description">
-          <dl>
-            <dt><%= product.title %></dt>
-            <dd><%= truncate(strip_tags(product.description), length: 80) %></dd>
-          </dl>
-        </td>
-        <td class="list_actions">
-          <%= link_to 'Show', product %><br/>
-          <%= link_to 'Edit', edit_product_path(product) %><br/>
-          <%= link_to 'Destroy', product, method: :delete,
-                      data: { confirm: 'Are you sure?' } %>
-        </td>
-      </tr>
-    <% end %>
+    <tr class="<%= cycle('list_line_odd', 'list_line_even') %>">
+      <td>
+        <%= image_tag(product.image_url, class: 'list_image') %>
+      </td>
+      <td class="list_description">
+        <dl>
+          <dt><%= product.title %></dt>
+          <dd><%= truncate(strip_tags(product.description), length: 80) %></dd>
+        </dl>
+      </td>
+      <td class="list_actions">
+        <%= link_to 'Show', product %><br/>
+        <%= link_to 'Edit', edit_product_path(product) %><br/>
+        <%= link_to 'Destroy', product, method: :delete,
+                    data: { confirm: 'Are you sure?' } %>
+      </td>
+    </tr>
   <% end %>
-<% end %>
 </table>
 <br />
 <%= link_to 'New product', new_product_path %>
