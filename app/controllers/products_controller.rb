@@ -7,6 +7,16 @@ class ProductsController < ApplicationController
     @products = Product.all
   end
 
+  def who_bought
+    @product = Product.find(params[:id])
+    @latest_order = @product.orders.order(:updated_at).last 
+    if stale?(@latest_order)
+      respond_to do |format| 
+        format.atom
+      end 
+    end
+  end
+
   # GET /products/1
   # GET /products/1.json
   def show
